@@ -1,4 +1,3 @@
-//add in memes
 import React, { useState } from 'react';
 import { StyleSheet, ScrollView, Image, View, TouchableOpacity } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
