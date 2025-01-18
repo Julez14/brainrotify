@@ -11,7 +11,7 @@ export default function IntroScreen() {
       <Image
         style={styles.logo}
         source={require("../assets/images/LOLlenslogo.png")}
-        resizeMode="contain" // Ensures the entire image fits within the specified dimensions
+        resizeMode="contain"
       />
       <TouchableOpacity
         style={styles.button}
