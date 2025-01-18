@@ -1,3 +1,4 @@
+//test
 import React, { useState } from "react";
 import {
   View,
@@ -48,7 +49,7 @@ export default function InputInfoScreen() {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push("/(tabs)")}
+        onPress={() => router.push("/chatbot")}
       >
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
