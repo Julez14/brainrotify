@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Animated, PanResponder, Dimensions } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import Swiper from 'react-native-deck-swiper';
 import Svg, { Path } from 'react-native-svg';
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const cardData = [
   {
@@ -20,64 +19,75 @@ const cardData = [
 ];
 
 const HomeScreen = () => {
-  const [cards, setCards] = useState(cardData);
-  const [pan] = useState(new Animated.ValueXY());
+  const handleSwipeRight = (cardIndex) => {
+    console.log('Swiped Right on:', cardData[cardIndex]);
+  };
 
-  const panResponder = PanResponder.create({
-    onMoveShouldSetPanResponder: () => true,
-    onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
-      useNativeDriver: false,
-    }),
-    onPanResponderRelease: (_, gestureState) => {
-      if (gestureState.dx > 120) {
-
-        Animated.timing(pan, {
-          toValue: { x: SCREEN_WIDTH, y: gestureState.dy },
-          duration: 200,
-          useNativeDriver: false,
-        }).start(() => {
-          setCards((prev) => prev.slice(1)); 
-          pan.setValue({ x: 0, y: 0 });
-        });
-      } else if (gestureState.dx < -120) {
-        Animated.timing(pan, {
-          toValue: { x: -SCREEN_WIDTH, y: gestureState.dy },
-          duration: 200,
-          useNativeDriver: false,
-        }).start(() => {
-          setCards((prev) => prev.slice(1)); 
-          pan.setValue({ x: 0, y: 0 }); 
-        });
-      } else {
-        Animated.spring(pan, {
-          toValue: { x: 0, y: 0 },
-          useNativeDriver: false,
-        }).start();
-      }
-    },
-  });
+  const handleSwipeLeft = (cardIndex) => {
+    console.log('Swiped Left on:', cardData[cardIndex]);
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Learn</Text>
       <View style={styles.swipeContainer}>
-        {cards
-          .map((card, index) => {
-            const isFront = index === cards.length - 1;
-            return (
-              <Animated.View
-                key={card.id}
-                style={[
-                  styles.card,
-                  isFront ? { transform: [...pan.getTranslateTransform()] } : { opacity: 0.8 },
-                ]}
-                {...(isFront ? panResponder.panHandlers : {})}
-              >
-                <Image source={{ uri: card.url }} style={styles.cardImage} />
-              </Animated.View>
-            );
-          })
-          .reverse()}
+        <Swiper
+          cards={cardData}
+          renderCard={(card) => (
+            <View style={styles.card}>
+              <Image source={{ uri: card.url }} style={styles.cardImage} />
+            </View>
+          )}
+          keyExtractor={(card) => card.id.toString()}
+          onSwipedRight={(cardIndex) => handleSwipeRight(cardIndex)}
+          onSwipedLeft={(cardIndex) => handleSwipeLeft(cardIndex)}
+          stackSize={3}
+          cardVerticalMargin={20}
+          cardHorizontalMargin={20}
+          backgroundColor="transparent"
+          overlayLabels={{
+            left: {
+              title: 'NO',
+              style: {
+                container: {
+                  position: 'absolute',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                  borderRadius: 10,
+                },
+                label: {
+                  color: 'white',
+                  fontSize: 24,
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                },
+              },
+            },
+            right: {
+              title: 'YES',
+              style: {
+                container: {
+                  position: 'absolute',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'rgba(0, 255, 0, 0.5)',
+                  borderRadius: 10,
+                },
+                label: {
+                  color: 'white',
+                  fontSize: 24,
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                },
+              },
+            },
+          }}
+        />
       </View>
       <View style={styles.svgContainer}>
         <Svg width="70" height="65" viewBox="0 0 89 84" fill="none">
@@ -129,14 +139,13 @@ const styles = StyleSheet.create({
   },
   swipeContainer: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -10,
+    alignItems: 'center',
+    marginLeft: 27,
   },
   card: {
-    position: 'absolute',
-    width: 250,
-    height: 300,
+    width: 300,
+    height: 400,
     borderRadius: 10,
     backgroundColor: '#FFF',
     justifyContent: 'center',
@@ -155,11 +164,10 @@ const styles = StyleSheet.create({
   },
   svgContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 30,
     gap: 15,
-    marginBottom: 50,
-    marginTop: -20,
   },
   secondSvg: {
     marginLeft: 10,
@@ -167,7 +175,8 @@ const styles = StyleSheet.create({
   pngContainer: {
     alignItems: 'center',
     marginTop: -50,
-    marginBottom: 100,
+    marginBottom: 80,
+    marginLeft: 5,
   },
   pngImage: {
     width: 150,
