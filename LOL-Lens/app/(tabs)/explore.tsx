@@ -65,10 +65,11 @@ const styles = StyleSheet.create({
   titleContainer: {
     marginTop: 70,
     alignItems: 'center',
+    marginBottom: 8,
   },
   imageColumn: {
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: -5,
   },
   sideImagesRow: {
     flexDirection: 'row',
