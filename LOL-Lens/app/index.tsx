@@ -1,13 +1,19 @@
+// TODO: Replace the logo image with a logo SVG so that it looks better
+
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { Image } from "expo-image";
 
 export default function IntroScreen() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>LOLLens</Text>
+      <Image
+        style={styles.logo}
+        source={require("../assets/images/LOLlenslogo.png")}
+      />
       <Text style={styles.tagline}>Learning from a different perspective</Text>
       <TouchableOpacity
         style={styles.button}
@@ -27,9 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#2f9d8a",
   },
   logo: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#fff",
+    width: 500, // Adjust width of the image
+    height: 100, // Adjust height of the image
+    marginBottom: 20, // Add spacing between the image and other elements
   },
   tagline: {
     fontSize: 16,

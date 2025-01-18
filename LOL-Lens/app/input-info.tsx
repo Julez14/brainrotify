@@ -6,8 +6,11 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { useRouter } from "expo-router";
 
 export default function InputInfoScreen() {
+  const router = useRouter();
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -43,7 +46,10 @@ export default function InputInfoScreen() {
         onChangeText={(text) => setForm({ ...form, age: text })}
         keyboardType="numeric"
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push("/(tabs)")}
+      >
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
     </View>
