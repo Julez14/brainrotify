@@ -16,7 +16,10 @@
 
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
+import { ConvexReactClient } from "convex/react";
 import { Text, View } from "react-native";
+
+const convex = new ConvexReactClient("https://oceanic-sardine-12.convex.cloud");
 
 export default function Index() {
   const tasks = useQuery(api.tasks.get);
