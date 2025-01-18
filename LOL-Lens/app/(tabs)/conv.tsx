@@ -10,16 +10,9 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
       }}
     >
-      <Text style={{ color: "red" }}>hello</Text>
-      {tasks?.map(({ _id, text }) => (
-        <Text key={_id} style={{ color: "red" }}>
-          {" "}
-          {text}{" "}
-        </Text>
-      ))}
     </View>
   );
 }
