@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   ScrollView,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Alert,
 } from "react-native";
-import Svg, { Circle, Path } from "react-native-svg";
+import Svg, { Circle } from "react-native-svg";
 import { useQuery } from "convex/react";
+import * as ImagePicker from "expo-image-picker";
 import { api } from "../../convex/_generated/api";
 
 export default function Profile() {
+  const [profilePic, setProfilePic] = useState(null);
   const data = useQuery(api.getUser.getUser);
+
+  const pickImage = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permissionResult.granted) {
+      Alert.alert("Permission Denied", "You need to allow access to your gallery.");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setProfilePic(result.assets[0].uri); 
+    }
+  };
 
   if (!data) {
     return (
@@ -24,11 +48,21 @@ export default function Profile() {
     <ScrollView style={styles.back}>
       <View style={styles.container}>
         <Text style={styles.title}>Profile</Text>
-        <View style={styles.pic}>
-          <Svg xmlns="http://www.w3.org/2000/svg" width="152" height="152" viewBox="0 0 152 152" fill="none">
-            <Circle cx="76" cy="76" r="76" fill="#D9D9D9" />
-          </Svg>
-        </View>
+        <TouchableOpacity style={styles.pic} onPress={pickImage}>
+          {profilePic ? (
+            <Image source={{ uri: profilePic }} style={styles.image} />
+          ) : (
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="152"
+              height="152"
+              viewBox="0 0 152 152"
+              fill="none"
+            >
+              <Circle cx="76" cy="76" r="76" fill="#D9D9D9" />
+            </Svg>
+          )}
+        </TouchableOpacity>
         <Text style={styles.h1}>{data[0]?.firstName || "N/A"} {data[0]?.lastName || "N/A"}</Text>
         <Text style={styles.h2}>{data[0]?.number || "N/A"}</Text>
         <Text style={styles.h2}>{data[0]?.age || "N/A"}</Text>
@@ -134,39 +168,15 @@ const styles = StyleSheet.create({
   pic: {
     alignItems: "center",
     marginTop: 40,
+    borderRadius: 76,
+    overflow: "hidden",
+    width: 152,
+    height: 152,
   },
-  ribbon: {
-    marginTop: 30,
-    marginBottom: 50,
-    position: "relative",
-    alignItems: "center",
-  },
-  badges: {
-    marginTop: 30,
-  },
-  counter: {
-    fontSize: 40,
-    fontWeight: "bold",
-    marginTop: 20,
-    textAlign: "center",
-    color: "white",
-    position: "absolute",
-    zIndex: 1000,
-  },
-  days: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginTop: 75,
-    textAlign: "center",
-    color: "white",
-    position: "absolute",
-    zIndex: 1000,
-  },
-  h4: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginTop: 20,
-    textAlign: "center",
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 76,
   },
   bad: {
     marginTop: 10,
