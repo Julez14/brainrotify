@@ -11,4 +11,9 @@ export default defineSchema({
         occupation: v.string(),
         created_at: v.number(),
     }).index("by_number", ["number"]),
+    memes: defineTable({
+        url: v.string(),
+        liked: v.string(),
+        created_at: v.number(),
+    }),
 })

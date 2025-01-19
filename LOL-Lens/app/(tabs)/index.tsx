@@ -1,27 +1,58 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import React, {useRef} from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Pressable } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import Svg, { Path } from 'react-native-svg';
 import { useRouter } from 'expo-router';
-
+// Import `useMutation` and `api` from Convex.
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 const cardData = [
   {
     id: 1,
-    url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    url: 'https://i.pinimg.com/736x/26/5e/07/265e0737f5209e666e121cfdb151ba5f.jpg',
   },
   {
     id: 2,
-    url: 'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?q=80&w=2235&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    url: 'https://i.pinimg.com/736x/6c/dd/d4/6cddd44aab04449816faa5b1a407439a.jpg',
   },
   {
     id: 3,
-    url: 'https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    url: 'https://i.pinimg.com/736x/58/24/74/5824747aab09a9ce7b28fd03f3bb93d6.jpg',
+  },
+  {
+    id: 4,
+    url: 'https://i.pinimg.com/736x/77/c0/93/77c0936e6164b79e39bf8ff3871852e4.jpg',
+  },
+  {
+    id: 5,
+    url: 'https://i.pinimg.com/736x/9b/14/94/9b1494a48c1e0d8df0886ad879f769de.jpg',
+  },
+  {
+    id: 6,
+    url: 'https://i.pinimg.com/736x/50/01/f1/5001f1f97d6ed975ce3b53fd48048903.jpg',
+  },
+  {
+    id: 7,
+    url: 'https://i.pinimg.com/736x/35/17/6b/35176b705d47f7c5bf27497b50d04173.jpg',
+  },
+  {
+    id: 8,
+    url: 'https://i.pinimg.com/736x/47/84/6d/47846d60f1310e89f57cf624256de9e7.jpg',
+  },
+  {
+    id: 9,
+    url: 'https://i.pinimg.com/736x/de/6b/99/de6b99d5695dd4196b7d492a3c0a58a7.jpg',
+  },
+  {
+    id: 10,
+    url: 'https://i.pinimg.com/736x/81/d9/73/81d9735c6f6f358655d504571149b2fe.jpg',
   },
 ];
 
 const HomeScreen = () => {
   const router = useRouter();
+  const swiperRef = useRef(null);
 
   const handleSwipeRight = (cardIndex) => {
     console.log('Swiped Right on:', cardData[cardIndex]);
@@ -31,16 +62,64 @@ const HomeScreen = () => {
     console.log('Swiped Left on:', cardData[cardIndex]);
   };
 
-  const navigateToArticles= async () =>{
-    console.log("what the hehehehehhe")
-    router.push('./articles.tsx'); // Navigate to the articles route
+  const addedMeme = useMutation(api.addMeme.addMeme);
+
+  // const handlePress = async (url: string) => {
+  //   await addedMeme({ url, liked: "liked" });
+  //   console.log("YESSIR");
+  // };
+
+  const handlePress = async () => {
+    console.log("PLELSLLLLS");
+    if (swiperRef.current) {
+      // Access currentIndex directly from the state
+      const currentIndex = (swiperRef.current as any).state.firstCardIndex;
+      console.log("Current index:", currentIndex);
+      
+      // Get the current card's URL
+      const currentCard = cardData[currentIndex];
+      
+      if (currentCard) {
+        try {
+          await addedMeme({ url: currentCard.url, liked: "liked" });
+          console.log("Successfully added meme:", currentCard.url);
+        } catch (error) {
+          console.error("Error adding meme:", error);
+        }
+      }
+    }
   };
+
+  // const handlePress = async () => {
+  //   console.log("PLELSLLLLS")
+  //   if (swiperRef.current) {
+  //     // Get the current card index
+  //     const currentIndex = swiperRef.current.getCurrentIndex();
+  //     console.log("PS")
+  //     // Get the current card's URL
+  //     const currentCard = cardData[currentIndex];
+      
+  //     if (currentCard) {
+  //       try {
+  //         await addedMeme({ url: currentCard.url, liked: "liked" });
+  //         console.log("Successfully added meme:", currentCard.url);
+  //       } catch (error) {
+  //         console.error("Error adding meme:", error);
+  //       }
+  //     }
+  //   }
+  // };
+
+  // const handlePress = () => {
+  //   console.log("rbrbrbrb")
+  // }
 
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Learn</Text>
       <View style={styles.swipeContainer}>
         <Swiper
+        ref={swiperRef}
           cards={cardData}
           renderCard={(card) => (
             <View style={styles.card}>
@@ -114,7 +193,13 @@ const HomeScreen = () => {
             strokeLinejoin="round"
           />
         </Svg>
-        <Svg width="70" height="65" viewBox="0 0 89 84" fill="none" style={styles.secondSvg}>
+        {/* <Pressable
+      onPress={onPress}
+    > */}
+        <Pressable style={styles.press}
+      onPress={handlePress}
+    >
+      <Svg width="70" height="65" viewBox="0 0 89 84" fill="none" style={styles.secondSvg}>
           <Path
             d="M87 42C87 63.984 68.0826 82 44.5 82C20.9174 82 2 63.984 2 42C2 20.016 20.9174 2 44.5 2C68.0826 2 87 20.016 87 42Z"
             fill="#00B488"
@@ -126,17 +211,24 @@ const HomeScreen = () => {
             fill="white"
           />
         </Svg>
-      </View>
-      <View style={styles.pngContainer}>
-        <TouchableOpacity style={styles.button} onPress={navigateToArticles}>
-          <Text style={styles.buttonText}>Learn More</Text>
-        </TouchableOpacity>
+
+        </Pressable>
+      
+    {/* </Pressable> */}
+        {/* <TouchableOpacity onPress={() => handleTouch(card.url)}> */}
+
+        {/* </TouchableOpacity> */}
+        
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  press: {
+    position: "absolute",
+    zIndex: 102000,
+  },
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
@@ -176,12 +268,11 @@ const styles = StyleSheet.create({
   svgContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 30,
+    marginBottom: 170,
     gap: 15,
   },
   secondSvg: {
-    marginLeft: 10,
+    marginLeft: 10
   },
   pngContainer: {
     alignItems: 'center',

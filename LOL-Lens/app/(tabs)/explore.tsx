@@ -51,7 +51,7 @@ export default function TabTwoScreen() {
     <ThemedView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Your Liked</ThemedText>
+          <ThemedText type="title">Your Likedd</ThemedText>
         </ThemedView>
         {mainImages.map((mainImage) => (
           <View key={mainImage.id} style={styles.imageColumn}>
