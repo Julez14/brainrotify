@@ -1,0 +1,6 @@
+module Pods_LOLLens {
+  umbrella header "Pods-LOLLens-umbrella.h"
+
+  export *
+  module * { export * }
+}
