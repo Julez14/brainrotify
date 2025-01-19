@@ -57,7 +57,7 @@ export default function InputInfoScreen() {
         });
         Alert.alert("Sign up successful!");
         setIsRegistered(true); // Switch to login form after successful sign up
-        router.push("/chatbot");
+        router.push("(tabs)");
       } catch (error) {
         Alert.alert("Error", "Failed to create account");
       }

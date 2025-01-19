@@ -56,6 +56,7 @@ const HomeScreen = () => {
   const swiperRef = useRef(null);
   const randomNumber = Math.floor(Math.random() * 100) + 1;
   const [randomNum, setRandomNum] = useState(randomNumber);
+  const [isPressed, setIsPressed] = useState(false); // Track press state
 
   const handleSwipeRight = (cardIndex) => {
     console.log('Swiped Right on:', cardData[cardIndex]);
@@ -181,9 +182,15 @@ const HomeScreen = () => {
         {/* <Pressable
       onPress={onPress}
     > */}
-        <Pressable style={styles.press}
+            <Pressable 
+          style={[styles.press, isPressed && styles.pressedButton]} // Apply border on press
+          onPressIn={() => setIsPressed(true)} // Button pressed in
+          onPressOut={() => setIsPressed(false)} // Button released
+          onPress={handlePress}
+        >
+        {/* <Pressable style={styles.press}
       onPress={handlePress}
-    >
+    > */}
       <Svg width="70" height="65" viewBox="0 0 89 84" fill="none" style={styles.secondSvg}>
           <Path
             d="M87 42C87 63.984 68.0826 82 44.5 82C20.9174 82 2 63.984 2 42C2 20.016 20.9174 2 44.5 2C68.0826 2 87 20.016 87 42Z"
@@ -213,6 +220,15 @@ const styles = StyleSheet.create({
   press: {
     position: "absolute",
     zIndex: 102000,
+  },
+  pressedButton: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.90,
+    shadowRadius: 4,
+    // borderColor: '#00B488', // Set the border color on press
+    // borderWidth: 4, // Set border width
+    // borderRadius: 100, // Optional: to make it circular
   },
   container: {
     flex: 1,

@@ -13,6 +13,7 @@ import axios from "axios";
 import OPENAI_API_KEY from "../openaikey";
 
 const ArticleDetail = ({ route }: { route: any }) => {
+  console.log("Key: " + OPENAI_API_KEY);
   const params = useLocalSearchParams();
   const { title, date, time, text } = params;
 
