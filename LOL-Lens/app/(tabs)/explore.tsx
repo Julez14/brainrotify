@@ -51,7 +51,7 @@ export default function TabTwoScreen() {
     <ThemedView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Your Likedd</ThemedText>
+          <ThemedText type="title">Your Liked</ThemedText>
         </ThemedView>
         {mainImages.map((mainImage) => (
           <View key={mainImage.id} style={styles.imageColumn}>
@@ -77,6 +77,7 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: 80
   },
   scrollContainer: {
     alignItems: 'center',
