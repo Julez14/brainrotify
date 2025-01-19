@@ -10,22 +10,20 @@ import {
 } from "react-native";
 import Svg, { Circle } from "react-native-svg";
 import { useQuery } from "convex/react";
-import * as ImagePicker from "expo-image-picker"; // Import image picker
+import * as ImagePicker from "expo-image-picker";
 import { api } from "../../convex/_generated/api";
 
 export default function Profile() {
-  const [profilePic, setProfilePic] = useState(null); // State to hold profile picture
+  const [profilePic, setProfilePic] = useState(null);
   const data = useQuery(api.getUser.getUser);
 
   const pickImage = async () => {
-    // Request permissions
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permissionResult.granted) {
       Alert.alert("Permission Denied", "You need to allow access to your gallery.");
       return;
     }
 
-    // Open image picker
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -34,7 +32,7 @@ export default function Profile() {
     });
 
     if (!result.canceled) {
-      setProfilePic(result.assets[0].uri); // Set the selected image URI
+      setProfilePic(result.assets[0].uri); 
     }
   };
 
