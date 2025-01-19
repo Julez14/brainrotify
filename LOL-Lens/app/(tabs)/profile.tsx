@@ -30,7 +30,7 @@ import { useQuery } from "convex/react";  // Use the useQuery hook
     );
   }
   return (
-    <ScrollView>
+    <ScrollView style={styles.back}>
 
     
     <View style={styles.container}>
@@ -79,11 +79,15 @@ import { useQuery } from "convex/react";  // Use the useQuery hook
 }
 
 const styles = StyleSheet.create({
+  back: {
+    color: "#FFFFFF"
+  },
   container: {
     flex: 1,
     padding: 80,
     justifyContent: "flex-start",
     alignItems: "center",
+    backgroundColor:"white"
   },
   counter: {
     fontSize: 40,
