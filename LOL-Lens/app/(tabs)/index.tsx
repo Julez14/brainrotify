@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import Svg, { Path } from 'react-native-svg';
+import { useRouter } from 'expo-router';
 
 const cardData = [
   {
@@ -19,12 +20,18 @@ const cardData = [
 ];
 
 const HomeScreen = () => {
+  const router = useRouter();
+
   const handleSwipeRight = (cardIndex) => {
     console.log('Swiped Right on:', cardData[cardIndex]);
   };
 
   const handleSwipeLeft = (cardIndex) => {
     console.log('Swiped Left on:', cardData[cardIndex]);
+  };
+
+  const navigateToArticles = () => {
+    router.push('/articles'); // Navigate to the articles route
   };
 
   return (
@@ -119,7 +126,9 @@ const HomeScreen = () => {
         </Svg>
       </View>
       <View style={styles.pngContainer}>
-        <Image source={require("../../assets/images/upload.png")} style={styles.pngImage} />
+        <TouchableOpacity style={styles.button} onPress={() => console.log('Button Pressed')}>
+          <Text style={styles.buttonText}>Learn More</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -182,6 +191,25 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     resizeMode: 'contain',
+  },
+  button: {
+    backgroundColor: '#00B488',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4,
+    marginTop: 50,
+    marginBottom: 60,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFF',
+    textAlign: 'center',
   },
 });
 
