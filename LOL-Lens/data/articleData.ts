@@ -56,10 +56,106 @@ Searching for great deals and checking items off your holiday shopping list can 
   },
   {
     id: 2,
-    title: "The Secrets to Effective Study Habits",
-    date: "October 5, 2024",
-    time: "8 min",
-    text: "hello world",
+    title:
+      "Cybersecurity Scams Get a Boost from Technology: What Small and Medium-sized Enterprises Should Watch Out For",
+    date: "October 28, 2024",
+    time: "4 min",
+    text: `The recent edition of CPABC in Focus, a publication by the Chartered Professional Accountants of British Columbia (CPABC), features a conversation with Michael Argast, co-founder of Kobalt.io. Argast reveals cybersecurity threats affecting SMEs, how technology plays a part in advancing these threats and how to protect against them.
+
+Over the past year, the quality and frequency of cyberattacks on small and medium-sized businesses (SMEs) has increased, thanks in large part to AI and automation. While cybercriminals are building off tried and true tactics, advances in technology are making it easier to find businesses that have vulnerabilities – and to exploit them.
+
+Here are some of the top threats and trends SMEs face in the cybersecurity landscape today.
+
+Social engineering
+Social engineering involves manipulating individuals into disclosing private information. While social engineering attacks exploit human behaviour – they play on emotions such as trust and urgency to trick individuals into giving up sensitive information – technology advancements have helped cyber criminals cast a wider net and therefore realize greater success. 
+
+“AI is being used in a variety of different ways now,” explains Argast. “Better written content is an example where it's tailored to the particular target. If you want to mimic a CEO, for example, you can feed in a bunch of the CEO’s previous writing and use AI to draft an email that has the same tone and language.”
+
+Argast further explains that video and voice tools are becoming more prevalent - deepfakes of employees have successfully convinced people to transfer funds. “You can use a four-second sample of somebody’s voice to launch simulated messages and have real-time conversations,” he adds.
+
+Third party risk
+Argast explains that most businesses do not store their own data, so it's hard for SMEs to control and manage the optimal level of protection. “Most organizations today don’t run their own technology stacks,” he says. “They don’t host their own data. Instead, they rely on SaaS1 providers and cloud providers of various pedigrees to do that. And third parties are getting compromised all over the place.” 
+
+With an ability to target suppliers with multiple partners, cybercriminals can gain access to thousands of organizations through one successful breach.
+
+Business email compromise 
+In a business email compromise scam, criminals send an email message that appears to come from a known source making a legitimate request. Again, AI has given these scams a boost, making them more sophisticated and easier for scammers to carry out.
+
+“Business email and transfer fraud is much more sophisticated than many people realize. It’s not a sketchy email from your CFO requesting a financial transfer to an offshore account,” says Argast. 
+
+“The business email fraud that’s happening today, with these wide-net attacks, enables attackers to live inside your email systems for weeks or months and insert themselves into existing chains of communication, which makes their activities seem highly credible. And they’re going to target the single largest financial transfer you’re going to do in six months.”
+
+How to protect your business
+Argast offers the following suggestions for business owners:
+
+Solopreneurs
+
+Use alternate communication channels to verify requests. Argast explains that cybercriminals typically attack just one channel at a time. So, if an email is received requesting a transfer of funds or release of information, it’s best to use a different channel (phone, video, Slack) to reach out to the other party.
+Protect devices with encryption, password protection and anti-malware software
+Use Multi-Factor Authentication whenever possible
+Use a secure cloud service provider that has demonstrated due diligence
+SMEs with 5-10 employees
+
+All of the above, plus:
+Partner with a cybersecurity firm to perform a risk assessment, which can help prioritize cybersecurity investments
+Businesses with 20+ employees 
+
+All of the above, plus:
+Implement an industry standard, such as ISO 270012
+Ultimately, one of the best ways to protect your business is to seek help from cybersecurity experts. “A lot of small business owners think they have to build this themselves, but there are good service providers out there who focus on delivering cybersecurity services at a fraction of what it would cost to build these kinds of capabilities in-house,” says Argast. “They know best practices, and they can scale their services to the size of the business.” 
+
+Read the full interview with Michael Argast here, to learn more about the top cybersecurity concerns affecting SMEs and how to stay ahead of cybercriminals that are using AI and automation to advance their efforts.`,
   },
-  // Add more articles as needed
+  {
+    id: 3,
+    title: "Everything You Need to Know About Disputing Credit Card Charges",
+    date: "December 4, 2024",
+    time: "5 min",
+    text: `If you’ve found an unfamiliar charge on your credit card, you may be worried about covering the cost. But there are steps you can take to dispute the charge. Here’s a how-to on recognizing fraudulent transactions, disputing them and protecting yourself from fraud in the future.
+
+Despite advancements in credit card production and anti-fraud technology, credit card fraud remains a highly prevalent form of fraud around the world. In Canada, nearly a quarter (24%) of cardholders have experienced credit card fraud, and that number jumps to 60% in the U.S.
+
+How to avoid being a victim of credit card Fraud
+Never give out your credit card information in response to an unsolicited call, text or email. 
+If you’re interested in giving to a charity, do your own research to find a legitimate organization that matches your charitable values and goals. 
+If you’re tracking a delivery, use the company’s official website using the tracking number provided. 
+Never leave your card unattended or write down your credit card number or your pin on an unsecured form. If you’re paying at a restaurant, ask to use the credit card terminal so the card doesn’t leave your sight.
+If you need to provide your credit card information in a public space, be sure there is no one around to record the card number or your pin.
+How to spot fraudulent transactions
+The best way to spot a fraudulent credit card transaction is to regularly monitor your account. For instance:
+
+Scan your transactions regularly through online or mobile banking. Signing in to digital banking on a regular basis is the best way to stay on top of your credit card charges and makes it easy to recognize a transaction you didn’t make. This way, you can also dispute charges shortly after they occur, which can make it easier to resolve them.
+Set up fraud alerts: If you have an RBC credit card, you can set up fraud alerts, where you’ll automatically receive an SMS text message from 722373 any time a credit card transaction looks out of the ordinary for you. You’ll be able to immediately confirm if you’ve made the transaction or not by responding directly to the message. It’s easy to set up or update your Alert settings through RBC Online Banking1 and the RBC Mobile1 app.
+Review your statement each month, whether you receive it electronically or in the mail, and look through all your transactions. You may not notice something is off if you look only at the balance.
+The best way to spot a fraudulent credit card transaction is to regularly monitor your account. For instance:
+
+Other reasons you might not recognize a transaction
+
+Unfamiliar credit card transactions aren’t always the result of fraud. Here are other instances where you might not recognize a transaction: 
+
+Unfamiliar merchant name: Sometimes the name a merchant uses for its storefront is different from its registered business name. 
+Unfamiliar amount: When a transaction settles, there may be a difference between the amount you were initially charged (the Authorized Transaction) and the final amount you actually paid (the Posted Transaction). 
+Unfamiliar date: A delay may occur between the time a transaction is settled and removed from Authorized Transactions, and when it appears in Posted Transactions.
+Multiple cardholders or users: If you’re the primary cardholder or a co-applicant, your transaction list will include your purchases, as well as any purchases made by authorized users and other cardholders. 
+Expired trials or free memberships: Sometimes free trials automatically transition into paid subscriptions. 
+Taking action on a charge you didn’t make
+If you notice a transaction you know you didn’t make, here’s what to do next:
+
+Lock your card – If you’re an RBC cardholder, you can easily lock and unlock your card via the RBC Mobile app or RBC Online Banking. It can be temporarily locked and unlocked at any time.
+
+Dispute the fraudulent transaction – If you use RBC Online Banking or the RBC Mobile app, it’s easy to dispute a transaction through either of these digital platforms. On your credit card transaction page, choose the transaction in question and select “I disagree with this charge.” RBC will review the request and get back to you with an update on your claim within three to five business days.
+
+Other ways you’re protected
+RBC fraud protection: If you’re concerned about a fraudulent transaction, you can call 1-800-769-2512 and RBC will be happy to help you. Provided you’ve taken reasonable precautions to protect your PIN and your card, you’re covered for any fraudulent charges both online and in-store.
+
+RBC Digital Banking Security Guarantee: You’re fully protected against any eligible digital transactions you didn’t make or approve so long as you fulfill your responsibilities1. Should something covered by the Digital Banking Security Guarantee ever happen, RBC will work to resolve any unauthorized transactions made through the RBC Mobile2 app or RBC Online Banking2.
+
+Zero Liability Protection: Visa and Mastercard offer Zero Liability policies protect you from unauthorized use of your card. 
+
+While credit card fraud remains common today, there are steps you can take to protect yourself and dispute a fraudulent charge. 
+
+It is critical that we all become more Cyber Aware and safeguard our online activities. Visit Be Cyber Aware for more tips.
+
+Stay informed about any new or ongoing scams by checking RBC Current Scam Alerts.`,
+  },
 ];
