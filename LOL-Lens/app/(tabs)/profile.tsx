@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,10 +9,26 @@ import {
   ScrollView
 } from "react-native";
 import { RotateInDownRight } from "react-native-reanimated";
+import { api } from "../../convex/_generated/api";
 import Svg, { Circle, Path } from "react-native-svg";
+import { useQuery } from "convex/react";  // Use the useQuery hook
 
-export default function Profile() {
+  // const existingData = useQuery(api.getUser.getUser, number); // Retrieve the existing data
+  export default function Profile() {
+   
+  const data = useQuery(api.getUser.getUser);
+  // console.log("please", data.firstName)
+  console.log("DATAAAA", data)
+    // const data = useQuery(api.getUser.getUser, { number });
 
+  // Handle loading state
+  if (!data) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
   return (
     <ScrollView>
 
@@ -24,10 +40,10 @@ export default function Profile() {
 <Circle cx="76" cy="76" r="76" fill="#D9D9D9"/>
 </Svg>
       </View>
-      <Text style={styles.h1}>Full Name</Text>
-      <Text style={styles.h2}>12345667909</Text>
-      <Text style={styles.h2}>20</Text>
-      <Text style={styles.h2}>Student</Text>
+      <Text style={styles.h1}>{data[0].firstName || "N/A"} {data[0].lastName || "N/A"}</Text>
+      <Text style={styles.h2}>{data[0].number || "N/A"} </Text>
+      <Text style={styles.h2}>{data[0].age || "N/A"} </Text>
+      <Text style={styles.h2}>{data[0].occupation || "N/A"} </Text>
       <View style={styles.progress}>
         <Text style={styles.h3}>Status</Text>
         <View style={styles.labels}>

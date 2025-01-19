@@ -13,7 +13,11 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
-import type * as tasks from "../tasks.js";
+import type * as createUser from "../createUser.js";
+import type * as getNewUser from "../getNewUser.js";
+import type * as getUser from "../getUser.js";
+import type * as loginUser from "../loginUser.js";
+import type * as schema from "../schema.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -24,7 +28,11 @@ import type * as tasks from "../tasks.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
-  tasks: typeof tasks;
+  createUser: typeof createUser;
+  getNewUser: typeof getNewUser;
+  getUser: typeof getUser;
+  loginUser: typeof loginUser;
+  schema: typeof schema;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
