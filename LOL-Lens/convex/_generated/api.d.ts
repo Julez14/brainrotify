@@ -15,6 +15,7 @@ import type {
 } from "convex/server";
 import type * as addMeme from "../addMeme.js";
 import type * as createUser from "../createUser.js";
+import type * as getCaptions from "../getCaptions.js";
 import type * as getMeme from "../getMeme.js";
 import type * as getNewUser from "../getNewUser.js";
 import type * as getUser from "../getUser.js";
@@ -32,6 +33,7 @@ import type * as schema from "../schema.js";
 declare const fullApi: ApiFromModules<{
   addMeme: typeof addMeme;
   createUser: typeof createUser;
+  getCaptions: typeof getCaptions;
   getMeme: typeof getMeme;
   getNewUser: typeof getNewUser;
   getUser: typeof getUser;

@@ -17,4 +17,9 @@ export default defineSchema({
         Id: v.string(),
         created_at: v.number(),
     }),
+    captions: defineTable({
+        id: v.number(),
+        caption: v.string(),
+        created_at: v.number(),
+    }),
 })

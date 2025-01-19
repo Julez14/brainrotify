@@ -5,6 +5,7 @@ export const addMeme = mutation({
   args: {
     url: v.string(),
     id: v.number(),
+    caption: v.string(),
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("memes", {

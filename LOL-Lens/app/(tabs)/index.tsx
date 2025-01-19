@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Pressable } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import Svg, { Path } from 'react-native-svg';
@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 // Import `useMutation` and `api` from Convex.
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import { carddata } from "../../data/captions"; // Import articles data
 
 const cardData = [
   {
@@ -53,13 +54,17 @@ const cardData = [
 const HomeScreen = () => {
   const router = useRouter();
   const swiperRef = useRef(null);
+  const randomNumber = Math.floor(Math.random() * 100) + 1;
+  const [randomNum, setRandomNum] = useState(randomNumber);
 
   const handleSwipeRight = (cardIndex) => {
     console.log('Swiped Right on:', cardData[cardIndex]);
+    setRandomNum(Math.floor(Math.random() * 100) + 1);
   };
 
   const handleSwipeLeft = (cardIndex) => {
     console.log('Swiped Left on:', cardData[cardIndex]);
+    setRandomNum(Math.floor(Math.random() * 100) + 1);
   };
 
   const addedMeme = useMutation(api.addMeme.addMeme);
@@ -70,7 +75,6 @@ const HomeScreen = () => {
   // };
 
   const handlePress = async () => {
-    console.log("PLELSLLLLS");
     if (swiperRef.current) {
       // Access currentIndex directly from the state
       const currentIndex = (swiperRef.current as any).state.firstCardIndex;
@@ -81,7 +85,7 @@ const HomeScreen = () => {
       
       if (currentCard) {
         try {
-          await addedMeme({ url: currentCard.url, id: currentCard.id });
+          await addedMeme({ url: currentCard.url, id: currentCard.id , caption: carddata[randomNum]});
           console.log("Successfully added meme:", currentCard.url);
         } catch (error) {
           console.error("Error adding meme:", error);
@@ -89,30 +93,6 @@ const HomeScreen = () => {
       }
     }
   };
-
-  // const handlePress = async () => {
-  //   console.log("PLELSLLLLS")
-  //   if (swiperRef.current) {
-  //     // Get the current card index
-  //     const currentIndex = swiperRef.current.getCurrentIndex();
-  //     console.log("PS")
-  //     // Get the current card's URL
-  //     const currentCard = cardData[currentIndex];
-      
-  //     if (currentCard) {
-  //       try {
-  //         await addedMeme({ url: currentCard.url, liked: "liked" });
-  //         console.log("Successfully added meme:", currentCard.url);
-  //       } catch (error) {
-  //         console.error("Error adding meme:", error);
-  //       }
-  //     }
-  //   }
-  // };
-
-  // const handlePress = () => {
-  //   console.log("rbrbrbrb")
-  // }
 
   return (
     <View style={styles.container}>
@@ -124,6 +104,11 @@ const HomeScreen = () => {
           renderCard={(card) => (
             <View style={styles.card}>
               <Image source={{ uri: card.url }} style={styles.cardImage} />
+              <View style={styles.cap}>
+              <Text style={styles.caption}>{carddata[randomNum]}</Text>
+              </View>  
+
+              
             </View>
           )}
           keyExtractor={(card) => card.id.toString()}
@@ -178,7 +163,7 @@ const HomeScreen = () => {
         />
       </View>
       <View style={styles.svgContainer}>
-        <Svg width="70" height="65" viewBox="0 0 89 84" fill="none">
+        {/* <Svg width="70" height="65" viewBox="0 0 89 84" fill="none">
           <Path
             d="M87 42C87 63.984 68.0826 82 44.5 82C20.9174 82 2 63.984 2 42C2 20.016 20.9174 2 44.5 2C68.0826 2 87 20.016 87 42Z"
             fill="#00B488"
@@ -192,7 +177,7 @@ const HomeScreen = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-        </Svg>
+        </Svg> */}
         {/* <Pressable
       onPress={onPress}
     > */}
@@ -245,6 +230,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 27,
+    marginTop: 20
+  },
+  caption: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
   },
   card: {
     width: 300,
@@ -258,6 +249,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    marginTop: 60
   },
   cardImage: {
     width: '100%',
@@ -268,7 +260,7 @@ const styles = StyleSheet.create({
   svgContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 170,
+    marginBottom: 190,
     gap: 15,
   },
   secondSvg: {
@@ -304,6 +296,175 @@ const styles = StyleSheet.create({
     color: '#FFF',
     textAlign: 'center',
   },
+  cap: {
+    height: 160,
+    color: '#000'
+  }
 });
 
 export default HomeScreen;
+
+
+// import React, { useRef } from 'react';
+// import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+// import Swiper from 'react-native-deck-swiper';
+// import Svg, { Path } from 'react-native-svg';
+// import { useRouter } from 'expo-router';
+// import { useMutation, useQuery } from "convex/react";
+// import { api } from "../../convex/_generated/api";
+
+// const HomeScreen = () => {
+//   const router = useRouter();
+//   const swiperRef = useRef(null);
+  
+//   // Fetch captions from Convex
+//   const captions = useQuery(api.getCaptions.getCaptions);
+  
+//   // Combine image data with captions
+//   const cardData = [
+//     {
+//       id: 1,
+//       url: 'https://i.pinimg.com/736x/26/5e/07/265e0737f5209e666e121cfdb151ba5f.jpg',
+//     },
+//     // ... rest of your image data
+//   ].map((card, index) => ({
+//     ...card,
+//     caption: captions?.[index]?.text || 'Loading caption...',
+//     captionId: captions?.[index]?._id,
+//   }));
+
+//   const handleSwipeRight = (cardIndex) => {
+//     console.log('Swiped Right on:', cardData[cardIndex]);
+//   };
+
+//   const handleSwipeLeft = (cardIndex) => {
+//     console.log('Swiped Left on:', cardData[cardIndex]);
+//   };
+
+//   const addedMeme = useMutation(api.addMeme.addMeme);
+
+//   const handlePress = async () => {
+//     if (swiperRef.current) {
+//       const currentIndex = (swiperRef.current as any).state.firstCardIndex;
+//       const currentCard = cardData[currentIndex];
+      
+//       if (currentCard) {
+//         try {
+//           await addedMeme({ 
+//             url: currentCard.url, 
+//             id: currentCard.id,
+//             captionId: currentCard.captionId // Include the caption ID in the mutation
+//           });
+//           console.log("Successfully added meme with caption");
+//         } catch (error) {
+//           console.error("Error adding meme:", error);
+//         }
+//       }
+//     }
+//   };
+
+//   // Show loading state while captions are being fetched
+//   if (!captions) {
+//     return (
+//       <View style={styles.container}>
+//         <Text>Loading...</Text>
+//       </View>
+//     );
+//   }
+
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.titleText}>Learn</Text>
+//       <View style={styles.swipeContainer}>
+//         <Swiper
+//           ref={swiperRef}
+//           cards={cardData}
+//           renderCard={(card) => (
+//             <View style={styles.cardContainer}>
+//               <View style={styles.card}>
+//                 <Image source={{ uri: card.url }} style={styles.cardImage} />
+//               </View>
+//               <View style={styles.captionContainer}>
+//                 <Text style={styles.captionText}>{card.caption}</Text>
+//               </View>
+//             </View>
+//           )}
+//           keyExtractor={(card) => card.id.toString()}
+//           onSwipedRight={handleSwipeRight}
+//           onSwipedLeft={handleSwipeLeft}
+//           stackSize={3}
+//           cardVerticalMargin={20}
+//           cardHorizontalMargin={20}
+//           backgroundColor="transparent"
+//           overlayLabels={{
+//             left: {
+//               title: 'NO',
+//               style: {
+//                 container: {
+//                   position: 'absolute',
+//                   justifyContent: 'center',
+//                   alignItems: 'center',
+//                   width: '100%',
+//                   height: '100%',
+//                   backgroundColor: 'rgba(255, 0, 0, 0.5)',
+//                   borderRadius: 10,
+//                 },
+//                 label: {
+//                   color: 'white',
+//                   fontSize: 24,
+//                   fontWeight: 'bold',
+//                   textAlign: 'center',
+//                 },
+//               },
+//             },
+//             right: {
+//               title: 'YES',
+//               style: {
+//                 container: {
+//                   position: 'absolute',
+//                   justifyContent: 'center',
+//                   alignItems: 'center',
+//                   width: '100%',
+//                   height: '100%',
+//                   backgroundColor: 'rgba(0, 255, 0, 0.5)',
+//                   borderRadius: 10,
+//                 },
+//                 label: {
+//                   color: 'white',
+//                   fontSize: 24,
+//                   fontWeight: 'bold',
+//                   textAlign: 'center',
+//                 },
+//               },
+//             },
+//           }}
+//         />
+//       </View>
+//       {/* SVG Container remains the same */}
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   // ... existing styles remain the same ...
+//   cardContainer: {
+//     width: 300,
+//     height: 450,
+//     justifyContent: 'flex-start',
+//     alignItems: 'center',
+//   },
+//   captionContainer: {
+//     width: '100%',
+//     padding: 10,
+//     backgroundColor: 'rgba(255, 255, 255, 0.9)',
+//     borderBottomLeftRadius: 10,
+//     borderBottomRightRadius: 10,
+//   },
+//   captionText: {
+//     fontSize: 16,
+//     color: '#333',
+//     textAlign: 'center',
+//   },
+// });
+
+// export default HomeScreen;
