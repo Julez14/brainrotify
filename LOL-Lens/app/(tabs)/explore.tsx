@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, ScrollView, Image, View, TouchableOpacity } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import * as Sharing from 'expo-sharing'; // Import the library
 
 export default function TabTwoScreen() {
   const [mainImages, setMainImages] = useState([
@@ -34,17 +35,29 @@ export default function TabTwoScreen() {
     setMainImages((prevImages) => prevImages.filter((image) => image.id !== id));
   };
 
+  const handleShare = async (uri) => {
+    if (await Sharing.isAvailableAsync()) {
+      try {
+        await Sharing.shareAsync(uri);
+      } catch (error) {
+        console.error('Error sharing the image:', error);
+      }
+    } else {
+      console.log('Sharing is not available on this device.');
+    }
+  };
+
   return (
     <ThemedView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Your Liked</ThemedText>
+          <ThemedText type="title">Your Likedd</ThemedText>
         </ThemedView>
         {mainImages.map((mainImage) => (
           <View key={mainImage.id} style={styles.imageColumn}>
             <View style={styles.sideImagesRow}>
               {/* Share Icon */}
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleShare(mainImage.uri)}>
                 <Image source={shareIcon} style={styles.sideImageLeft} />
               </TouchableOpacity>
               {/* Delete Icon */}
