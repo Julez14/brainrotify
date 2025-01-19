@@ -4,6 +4,7 @@ import Swiper from 'react-native-deck-swiper';
 import Svg, { Path } from 'react-native-svg';
 import { useRouter } from 'expo-router';
 
+
 const cardData = [
   {
     id: 1,
@@ -30,8 +31,9 @@ const HomeScreen = () => {
     console.log('Swiped Left on:', cardData[cardIndex]);
   };
 
-  const navigateToArticles = () => {
-    router.push('/articles'); // Navigate to the articles route
+  const navigateToArticles= async () =>{
+    console.log("what the hehehehehhe")
+    router.push('./articles.tsx'); // Navigate to the articles route
   };
 
   return (
@@ -126,7 +128,7 @@ const HomeScreen = () => {
         </Svg>
       </View>
       <View style={styles.pngContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => console.log('Button Pressed')}>
+        <TouchableOpacity style={styles.button} onPress={navigateToArticles}>
           <Text style={styles.buttonText}>Learn More</Text>
         </TouchableOpacity>
       </View>
