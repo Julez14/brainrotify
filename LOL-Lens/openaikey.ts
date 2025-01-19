@@ -1,0 +1,3 @@
+const OPENAI_API_KEY =
+  "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";
+export default OPENAI_API_KEY;
