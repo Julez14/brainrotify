@@ -240,6 +240,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
+    marginBottom: 210
   },
   title: {
     fontSize: 20,
