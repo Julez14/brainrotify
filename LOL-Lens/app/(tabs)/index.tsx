@@ -81,7 +81,7 @@ const HomeScreen = () => {
       
       if (currentCard) {
         try {
-          await addedMeme({ url: currentCard.url, liked: "liked" });
+          await addedMeme({ url: currentCard.url, id: currentCard.id });
           console.log("Successfully added meme:", currentCard.url);
         } catch (error) {
           console.error("Error adding meme:", error);

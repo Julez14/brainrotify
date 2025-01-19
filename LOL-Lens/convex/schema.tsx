@@ -13,7 +13,8 @@ export default defineSchema({
     }).index("by_number", ["number"]),
     memes: defineTable({
         url: v.string(),
-        liked: v.string(),
+        id: v.number(),
+        Id: v.string(),
         created_at: v.number(),
     }),
 })

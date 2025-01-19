@@ -4,7 +4,7 @@ import { v } from "convex/values";
 export const addMeme = mutation({
   args: {
     url: v.string(),
-    liked: v.string(),
+    id: v.number(),
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("memes", {
